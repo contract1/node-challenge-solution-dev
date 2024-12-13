@@ -1,25 +1,26 @@
-const Jasmine = require('jasmine');
-const reporters = require('jasmine-reporters');
+import Jasmine from 'jasmine';
+import reporters from 'jasmine-reporters';
+
 const jasmine = new Jasmine();
 
-process.env.TZ = 'Europe/Warsaw'
+process.env.TZ = 'Europe/Warsaw';
 
-var junitReporter = new reporters.JUnitXmlReporter({
-    savePath: __dirname,
-    consolidateAll: true,
-    filePrefix: "test-results"
+const junitReporter = new reporters.JUnitXmlReporter({
+  savePath: './', // Salva os resultados no diretório atual
+  consolidateAll: true,
+  filePrefix: 'test-results'
 });
+
 jasmine.env.addReporter(junitReporter);
 
 jasmine.loadConfig({
   spec_dir: 'test',
   spec_files: ['**/*[sS]pec.js'],
-  // helpers: ['helpers/**/*.js'],
   random: false,
   seed: null,
   stopSpecOnExpectationFailure: false
 });
 
-console.log(`Using Jasmine version: ${jasmine.jasmine.version}`)
+console.log(`Using Jasmine version: ${jasmine.jasmine.version}`);
 
 jasmine.execute();
